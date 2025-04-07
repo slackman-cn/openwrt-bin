@@ -12,6 +12,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# PROFILE="friendlyarm_nanopi-r5s"
+# PACKAGES="luci git git-gitweb git-http perl-uri"
 env:
   WRT_VERSION: "24.10.0"
   WRT_TARGET: "24.10.0-rockchip-armv8"
@@ -42,7 +44,7 @@ jobs:
           cd openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64
           make help
           make info 
-          make image PACKAGES="luci git git-gitweb git-http perl-uri"
+          make image PROFILE="friendlyarm_nanopi-r5s" PACKAGES="luci git git-gitweb git-http perl-uri"
 
       - name: Output
         run: |
