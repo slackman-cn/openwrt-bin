@@ -39,16 +39,14 @@ jobs:
 
       - name: Build Image
         run: |
-          ls -lh
-          ls -lh ${{github.workspace}}
           cd openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64
           make help
           make info 
           make image PACKAGES="luci git git-gitweb git-http perl-uri"
-          tree bin
+          mv bin/targets ~
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name:  ${WRT_TARGET}-dist
-          path: ${{github.workspace}}/openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64/bin/targets/x86/64/*.img.gz
+          name:  targets
+          path: ${{github.workspace}}/targets/x86/64/*.img.gz
