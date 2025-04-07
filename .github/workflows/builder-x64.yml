@@ -43,7 +43,13 @@ jobs:
           make help
           make info 
           make image PACKAGES="luci git git-gitweb git-http perl-uri"
-          mv bin/targets ~
+
+      - name: Output
+        run: |
+          cd ~
+          ls -lh 
+          ls -lh openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64
+          mv openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64/bin/targets .
 
       - name: Upload
         uses: actions/upload-artifact@v4
