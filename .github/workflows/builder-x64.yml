@@ -32,17 +32,20 @@ jobs:
       - name: Build Environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y language-pack-en build-essential wget zstd
+          sudo apt-get install -y language-pack-en build-essential wget zstd tree
           wget https://downloads.openwrt.org/releases/${WRT_VERSION}/targets/x86/64/openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64.tar.zst
           zstd -d openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64.tar.zst
           tar -xf openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64.tar
 
-      - name: Make Image
+      - name: Build Image
         run: |
+          ls -lh
+          ls -lh ${{github.workspace}}
           cd openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64
           make help
           make info 
           make image PACKAGES="luci git git-gitweb git-http perl-uri"
+          tree bin
 
       - name: Upload
         uses: actions/upload-artifact@v4
