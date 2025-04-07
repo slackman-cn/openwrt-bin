@@ -31,8 +31,8 @@ jobs:
 
       - name: Build Environment
         run: |
-          apt-get update
-          apt-get install -y language-pack-en build-essential wget zstd
+          sudo apt-get update
+          sudo apt-get install -y language-pack-en build-essential wget zstd
           wget https://downloads.openwrt.org/releases/${WRT_VERSION}/targets/x86/64/openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64.tar.zst
           zstd -d openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64.tar.zst
           tar -xf openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64.tar
@@ -47,5 +47,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name:  incus-dist
+          name:  ${WRT_TARGET}-dist
           path: ${{github.workspace}}/openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64/bin/targets/x86/64/
