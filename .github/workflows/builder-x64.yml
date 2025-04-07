@@ -46,7 +46,7 @@ jobs:
 
       - name: Output
         run: |
-          cd ~
+          cd ${{github.workspace}}
           ls -lh 
           ls -lh openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64
           mv openwrt-imagebuilder-${WRT_TARGET}.Linux-x86_64/bin/targets .
