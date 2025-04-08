@@ -1,0 +1,34 @@
+## Build OpenWrt Image
+
+x64   https://downloads.openwrt.org/releases/24.10.0/targets/x86/64/
+ARM   https://downloads.openwrt.org/releases/24.10.0/targets/rockchip/armv8/
+```
+zstd -d openwrt-imagebuilder-24.10.0-x86-64.Linux-x86_64.tar.zst
+tar -xf openwrt-imagebuilder-24.10.0-x86-64.Linux-x86_64.tar
+cd openwrt-imagebuilder-24.10.0-x86-64.Linux-x86_64
+
+make info
+make help
+make image
+
+--> output
+bin/targets/x86/64/*.img.gz
+```
+
+
+## Custom OpenWrt Image
+
+```
+make image PACKAGES="luci git git-gitweb git-http perl-uri" 
+
+make image FILES="../rootfs"  PACKAGES="luci git git-gitweb git-http perl-uri"
+```
+
+
+*Reference*
+
+https://openwrt.org/docs/guide-user/base-system/uci
+
+https://openwrt.org/zh/docs/guide-user/base-system/uci
+
+https://openwrt.org/zh/docs/guide-developer/uci-defaults
